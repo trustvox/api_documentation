@@ -1,0 +1,60 @@
+openapi: 3.0.0
+info:
+  title: deliveryboy
+  version: '1.0'
+  contact:
+    name: RATrustvox
+    email: ti.trustvox@reclameaqui.com.br
+  description: Deliveryboy internal API
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  /scheduling:
+    post:
+      summary: Schedule
+      tags:
+        - schedule
+        - notification
+        - create-scheduling
+      responses:
+        '200':
+          description: OK
+      operationId: create-scheduling
+      description: Creates an scheduling request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                recipient:
+                  type: string
+                  description: "Receiver's email or phone number"
+                channel:
+                  type: string
+                  description: Channel to be used in order to reach the receiver
+                  enum:
+                    - email
+                    - sms
+                priority:
+                  type: string
+                  default: low
+                  enum:
+                    - low
+                    - middle
+                    - high
+                  description: Priority queue in which it should be processed
+                scheduled_to:
+                  type: string
+                  description: Date and time where the message should be delivered
+                  format: date-time
+                payload:
+                  type: string
+                  description: Any tuple of customization tag and its value
+              required:
+                - recipient
+                - channel
+                - scheduled_to
+        description: ''
+components:
+  schemas: {}
