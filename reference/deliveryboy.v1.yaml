@@ -50,14 +50,14 @@ paths:
                           - failed
                       scheduled_to:
                         type: string
-                        format: date-time
+                        format: time
                       payload:
                         type:
                           - string
                           - object
                       created_at:
                         type: string
-                        format: date-time
+                        format: time
                     required:
                       - recipient
                       - channel
@@ -84,6 +84,10 @@ paths:
               properties:
                 scheduling:
                   type: object
+                  required:
+                    - recipient
+                    - channel
+                    - scheduled_to
                   properties:
                     recipient:
                       type: string
@@ -105,14 +109,10 @@ paths:
                     scheduled_to:
                       type: string
                       description: Date and time where the message should be delivered
-                      format: date-time
+                      format: time
                     payload:
                       type: string
                       description: Any tuple of customization tag and its value
-                  required:
-                    - recipient
-                    - channel
-                    - scheduled_to
               required:
                 - scheduling
         description: Scheduling params
