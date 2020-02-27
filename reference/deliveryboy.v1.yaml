@@ -33,7 +33,7 @@ paths:
                   errors:
                     type: object
       operationId: create-scheduling
-      description: Creates an scheduling request
+      description: Issues an scheduling request
       requestBody:
         content:
           application/json:
@@ -78,6 +78,7 @@ paths:
               required:
                 - scheduling
         description: Scheduling params
+      parameters: []
 components:
   schemas:
     Scheduling:
