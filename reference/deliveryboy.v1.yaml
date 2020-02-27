@@ -12,9 +12,6 @@ paths:
   /scheduling:
     post:
       summary: Schedule
-      tags:
-        - deliveryboy
-        - schedule
       responses:
         '201':
           description: Created
@@ -79,12 +76,12 @@ paths:
                 - scheduling
         description: Scheduling params
       parameters: []
+      tags:
+        - endpoints
 components:
   schemas:
     Scheduling:
       type: object
-      x-tags:
-        - deliveryboy
       description: Stores scheduling information to later delivery
       properties:
         data:
@@ -128,3 +125,5 @@ components:
               format: time
       required:
         - data
+      x-tags:
+        - schemas
