@@ -13,9 +13,8 @@ paths:
     post:
       summary: Schedule
       tags:
+        - deliveryboy
         - schedule
-        - notification
-        - create-scheduling
       responses:
         '201':
           description: Created
@@ -85,6 +84,7 @@ components:
       type: object
       x-tags:
         - deliveryboy
+      description: Stores scheduling information to later delivery
       properties:
         data:
           type: object
@@ -94,6 +94,7 @@ components:
             - priority
             - status
             - scheduled_to
+            - campaign
             - created_at
           properties:
             recipient:
