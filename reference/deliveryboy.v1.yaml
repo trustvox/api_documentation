@@ -23,48 +23,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  data:
-                    type: object
-                    properties:
-                      recipient:
-                        type: string
-                      channel:
-                        type: string
-                        enum:
-                          - email
-                          - sms
-                      priority:
-                        type: string
-                        enum:
-                          - low
-                          - middle
-                          - high
-                      status:
-                        type: string
-                        enum:
-                          - created
-                          - scheduled
-                          - delivered
-                          - failed
-                      scheduled_to:
-                        type: string
-                        format: time
-                      payload:
-                        type:
-                          - string
-                          - object
-                      created_at:
-                        type: string
-                        format: time
-                    required:
-                      - recipient
-                      - channel
-                      - priority
-                      - status
-                      - scheduled_to
-                      - created_at
+                $ref: '#/components/schemas/Scheduling'
         '422':
           description: Unprocessable Entity
           content:
@@ -87,6 +46,7 @@ paths:
                   required:
                     - recipient
                     - channel
+                    - campaign
                     - scheduled_to
                   properties:
                     recipient:
@@ -110,11 +70,59 @@ paths:
                       type: string
                       description: Date and time where the message should be delivered
                       format: time
-                    payload:
+                    campaign:
                       type: string
+                      description: Responsys campaign name
+                    payload:
+                      type: object
                       description: Any tuple of customization tag and its value
               required:
                 - scheduling
         description: Scheduling params
 components:
-  schemas: {}
+  schemas:
+    Scheduling:
+      type: object
+      x-tags:
+        - deliveryboy
+      properties:
+        data:
+          type: object
+          required:
+            - recipient
+            - channel
+            - priority
+            - status
+            - scheduled_to
+            - created_at
+          properties:
+            recipient:
+              type: string
+            channel:
+              type: string
+              enum:
+                - email
+                - sms
+            priority:
+              type: string
+              enum:
+                - low
+                - middle
+                - high
+            status:
+              type: string
+              enum:
+                - created
+                - scheduled
+                - delivered
+                - failed
+            scheduled_to:
+              type: string
+              format: time
+            campaign:
+              type: string
+            created_at:
+              type: string
+              format: time
+      required:
+        - data
