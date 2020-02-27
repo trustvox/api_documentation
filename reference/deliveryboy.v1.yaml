@@ -17,8 +17,63 @@ paths:
         - notification
         - create-scheduling
       responses:
-        '200':
-          description: OK
+        '201':
+          description: Created
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      recipient:
+                        type: string
+                      channel:
+                        type: string
+                        enum:
+                          - email
+                          - sms
+                      priority:
+                        type: string
+                        enum:
+                          - low
+                          - middle
+                          - high
+                      status:
+                        type: string
+                        enum:
+                          - created
+                          - scheduled
+                          - delivered
+                          - failed
+                      scheduled_to:
+                        type: string
+                        format: date-time
+                      payload:
+                        type:
+                          - string
+                          - object
+                      created_at:
+                        type: string
+                        format: date-time
+                    required:
+                      - recipient
+                      - channel
+                      - priority
+                      - status
+                      - scheduled_to
+                      - created_at
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: object
       operationId: create-scheduling
       description: Creates an scheduling request
       requestBody:
@@ -27,34 +82,39 @@ paths:
             schema:
               type: object
               properties:
-                recipient:
-                  type: string
-                  description: "Receiver's email or phone number"
-                channel:
-                  type: string
-                  description: Channel to be used in order to reach the receiver
-                  enum:
-                    - email
-                    - sms
-                priority:
-                  type: string
-                  default: low
-                  enum:
-                    - low
-                    - middle
-                    - high
-                  description: Priority queue in which it should be processed
-                scheduled_to:
-                  type: string
-                  description: Date and time where the message should be delivered
-                  format: date-time
-                payload:
-                  type: string
-                  description: Any tuple of customization tag and its value
+                scheduling:
+                  type: object
+                  properties:
+                    recipient:
+                      type: string
+                      description: "Receiver's email or phone number"
+                    channel:
+                      type: string
+                      description: Channel to be used in order to reach the receiver
+                      enum:
+                        - email
+                        - sms
+                    priority:
+                      type: string
+                      default: low
+                      enum:
+                        - low
+                        - middle
+                        - high
+                      description: Priority queue in which it should be processed
+                    scheduled_to:
+                      type: string
+                      description: Date and time where the message should be delivered
+                      format: date-time
+                    payload:
+                      type: string
+                      description: Any tuple of customization tag and its value
+                  required:
+                    - recipient
+                    - channel
+                    - scheduled_to
               required:
-                - recipient
-                - channel
-                - scheduled_to
-        description: ''
+                - scheduling
+        description: Scheduling params
 components:
   schemas: {}
