@@ -9,7 +9,7 @@ info:
 servers:
   - url: 'http://localhost:3000'
 paths:
-  /api/scheduling:
+  /api/schedulings:
     post:
       summary: Schedule
       responses:
