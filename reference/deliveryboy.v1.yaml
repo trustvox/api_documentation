@@ -9,7 +9,7 @@ info:
 servers:
   - url: 'http://localhost:3000'
 paths:
-  /scheduling:
+  /api/scheduling:
     post:
       summary: Schedule
       responses:
@@ -78,6 +78,7 @@ paths:
       parameters: []
       tags:
         - endpoints
+    parameters: []
 components:
   schemas:
     Scheduling:
