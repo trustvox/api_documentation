@@ -75,7 +75,24 @@ paths:
               required:
                 - scheduling
         description: Scheduling params
-      parameters: []
+      parameters:
+        - schema:
+            type: string
+            enum:
+              - application/json
+            default: application/json
+          in: header
+          name: Accept
+          description: ''
+          required: true
+        - schema:
+            type: string
+            default: application/json
+            enum:
+              - application/json
+          in: header
+          name: Content-Type
+          required: true
       tags:
         - endpoints
     parameters: []
